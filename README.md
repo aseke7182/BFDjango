@@ -1,2 +1,3 @@
-# Backend Framework
-## Django
+# Backend Framework.
+## Django.
+### KBTU VIII semester.

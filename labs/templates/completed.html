@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %} ">
+</head>
+<body>
+
+<button>Add Task</button>
+<h1> Tasks in "List1"</h1>
+<table style="width:100%">
+    <tr>
+        <th>Task</th>
+        <th>Created</th>
+        <th>Due on</th>
+        <th>Owner</th>
+        <th>Mark</th>
+    </tr>
+    {% for task in tasks %}
+    <tr>
+        <td>{{task.name}}</td>
+        <td>{{task.created}}</td>
+        <td>{{task.due_on}}</td>
+        <td>{{task.owner}}</td>
+        <td>
+            <button>Not Done</button>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<button>View incomplete tasks</button>
+<button>Delete this list</button>
+
+</body>
+</html>

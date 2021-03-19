@@ -1,23 +1,19 @@
-from django.shortcuts import render, get_object_or_404
-from .models import *
-from .serializers import *
-from rest_framework import generics, viewsets
+from django.db.models import Prefetch
+from rest_framework import generics
 from rest_framework.permissions import *
-from rest_framework.decorators import action
-from rest_framework.response import Response
-from django.db.models import Q, Prefetch
-import copy
+
+from .serializers import *
 
 
 # Create your views here.
 
-class TodoListAPIView(generics.ListAPIView):
+class TodoListAPIView(generics.ListCreateAPIView):
     permission_classes = (AllowAny,)
     queryset = TodoList.objects.all()
     serializer_class = TodoListSerializer
 
 
-class TodoIncompleteRetrieveAPIView(generics.RetrieveAPIView):
+class TodoIncompleteRetrieveAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (AllowAny,)
     serializer_class = TodoGetSerializer
 
@@ -26,7 +22,7 @@ class TodoIncompleteRetrieveAPIView(generics.RetrieveAPIView):
             Prefetch('tasks', queryset=Task.objects.filter(mark=False)))
 
 
-class TodoCompleteRetrieveAPIView(generics.RetrieveAPIView):
+class TodoCompleteRetrieveAPIView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (AllowAny,)
     serializer_class = TodoGetSerializer
 
@@ -35,7 +31,7 @@ class TodoCompleteRetrieveAPIView(generics.RetrieveAPIView):
             Prefetch('tasks', queryset=Task.objects.filter(mark=True)))
 
 
-class TaskListAPIView(generics.ListAPIView):
+class TaskListAPIView(generics.ListCreateAPIView):
     permission_classes = (AllowAny,)
     queryset = Task.objects.all()
     serializer_class = TaskSerializer

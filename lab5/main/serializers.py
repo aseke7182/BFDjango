@@ -11,7 +11,7 @@ class TodoListSerializer(serializers.ModelSerializer):
 class TaskSerializer(serializers.ModelSerializer):
     class Meta:
         model = Task
-        fields = ('id', 'name', 'created', 'due_on', 'owner', 'mark',)
+        fields = ('id', 'name', 'created', 'due_on', 'owner', 'mark', 'todo_list')
 
 
 class TodoGetSerializer(serializers.ModelSerializer):
@@ -20,5 +20,3 @@ class TodoGetSerializer(serializers.ModelSerializer):
     class Meta:
         model = TodoList
         fields = ('id', 'name', 'tasks')
-
-
